@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html ng-app="starter">
+<head>
+	<title>My Angular App</title>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Bootstrap Optional CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+	<!-- Custom Styles -->
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="col-sm-6 col-sm-offset-3">
+		<h2 class="centered">To Do List</h2>
+		<div ng-controller="TodoCtrl">
+			<input type="text" ng-model="newTodo.title" class="form-control" />
+			<br>
+			<button ng-click="click()" class="btn btn-warning centered">Submit</button>
+			<hr>
+			<div class="well">
+				<ng-pluralize count="todos.length" when="{'0': 'You have nothing to do!', 'one': 'You have one thing to do', 'other': 'You have {} things to do'}"></ng-pluralize>
+				<ul>
+					<li ng-repeat="todo in todos">{{todo.title}} <span class="date-span">- {{createdAt | date: 'EEEE MMM dd, yyyy | HH:mm'}} </span><button ng-click="delete()" class="btn btn-danger button-right">Delete</button></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+
+	<!-- AngularJS Routes -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.min.js"></script>
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+	<!-- Bootstrap JS -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<!-- Custom Scripts -->
+	<script src="app.js"></script>
+</body>
+</html>
