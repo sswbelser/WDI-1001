@@ -1,15 +1,34 @@
-<div class="col-sm-6 col-sm-offset-3">
-	<h2 class="centered">To Do List</h2>
-	<div ng-controller="TodoCtrl">
-		<input type="text" ng-model="newTodo.title" class="form-control" />
-		<br>
-		<button ng-click="click()" class="btn btn-warning centered">Submit</button>
-		<hr>
-		<div class="well">
-			<ng-pluralize count="todos.length" when="{'0': 'You have nothing to do!', 'one': 'You have one thing to do', 'other': 'You have {} things to do'}"></ng-pluralize>
-			<ul>
-				<li ng-repeat="todo in todos">{{todo.title}} <span class="date-span">- {{createdAt | date: 'EEEE MMM dd, yyyy | HH:mm'}} </span><button ng-click="delete()" class="btn btn-danger button-right">Delete</button></li>
-			</ul>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+			<h2>Current To Do List</h2>
+			<ng-pluralize count="todos.length" when="{'0': 'You have nothing to do', 'one': 'You have 1 thing to do', 'other': 'You have {} things to do'}">
+			</ng-pluralize>
+			<ul class="list-group">
+				<li ng-repeat="todo in todos" 
+					ng-include="'single-todo.html'" 
+					class="list-group-item">
+	    		</li>
+	    	</ul>
+	    	<hr>
+
+	    	<h2>Add To Do</h2>
+			<form name="newForm" ng-submit="createToDo()">
+				<label>What do you need to do?</label><br>
+				<input type="text" placeholder="Enter task" ng-model="newFormData.title" class="form-control" required autofocus><br>
+				<label>What is this related to?</label>
+				<div ng-repeat="kind in kinds">
+					<input type="radio" ng-model="newFormData.newKind" ng-value="kind" ng-required="!newFormData.newKind"> - {{kind}}<br>
+				</div>
+				<button type="submit" class="btn btn-warning" ng-disabled="newForm.$invalid">Add To List</button>
+			</form>
 		</div>
 	</div>
 </div>
+
+<!-- single-todo.html -->
+<script type="text/ng-template" id="single-todo.html">
+	<p ng-class="{ 'strikethrough' : todo.completed }">{{todo.title}} ({{todo.kind}}) -- <span class="posted-span">posted on {{todo.created_at | date : 'EEEE, MMMM d, yyyy - HH:mm'}}</span></p>
+	<button class="btn btn-primary" ng-click="completeToDo(todo)">Completed</button>
+	<button class="btn btn-danger" ng-click="deleteToDo(todo)">Delete</button>
+</script>

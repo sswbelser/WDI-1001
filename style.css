@@ -2,9 +2,11 @@
 	text-align: center;
 }
 
-.button-right {
+.posted-span {
+	color: rgba(150, 144, 144, 0.5);
 }
 
-.date-span {
-	color: rgba(150, 144, 144, 0.5)
+p.strikethrough {
+	text-decoration: line-through;
+	color: red;
 }
